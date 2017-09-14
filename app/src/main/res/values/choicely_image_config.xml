@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ChoicelyImageLibrary</string>
+
+    <item name="cis_tag_id" type="id"/>
+
+    <color name="cis_default_image_resource">#0000</color>
+
+</resources>
