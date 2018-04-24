@@ -1,0 +1,105 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+ext {
+    // This configuration will result in:
+    // compile '<groupId>:<artifactId>:<libVersion>'
+    groupId = 'com.choicely.imageservice' // package name of the project
+    artifactId = "imageservice" // module name of the library
+    libVersion = "0.0.1"
+}
+version = libVersion
+group = groupId
+
+bintray {
+    def Properties localProps = new Properties()
+    localProps.load(new FileInputStream(file("../local.properties")))
+    user = localProps["BINTRAY_USER"]
+    key = localProps["BINTRAY_KEY"]
+    publications = ['Library']
+    publish = true //[Default: false] Whether version should be auto published after an upload
+    override = false //[Default: false] Whether to override version artifacts already published
+    pkg {
+        repo = 'com.choicely'
+        name = 'imageservice'
+        userOrg = 'choicely'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/choicely/Android-Image-Service.git'
+        version {
+            name = libVersion
+            desc = 'Choicely Image Service'
+            released = new Date()
+//            vcsTag = '1.3.0'
+//            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId groupId
+            artifactId artifactId
+            version libVersion
+            name artifactId // pom.project.name must be same as bintray.pkg.name
+        }
+    }
+}
+
+//just copy paste the lines below
+if (project.hasProperty("android")) {
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        classpath += configurations.javadocDeps
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    // options.encoding = 'UTF-8'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+
+        Library(MavenPublication) {
+//            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId 'com.choicely'
+            artifactId 'imageservice'
+            version '0.0.1'
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included.
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
+}
+

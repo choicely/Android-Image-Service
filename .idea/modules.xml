@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/choicely-image-service.iml" filepath="$PROJECT_DIR$/choicely-image-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/choicelyimageservice/choicelyimageservice.iml" filepath="$PROJECT_DIR$/choicelyimageservice/choicelyimageservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imageservice/imageservice.iml" filepath="$PROJECT_DIR$/imageservice/imageservice.iml" />
     </modules>
   </component>
 </project>

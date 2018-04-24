@@ -1,1 +1,1 @@
-include ':app', ':choicelyimageservice'
+include ':app', ':imageservice'

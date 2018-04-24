@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * QuickLog
  * Convenience static service for logging and toggling log visibility.
- * <p/>
+ *
  * Created by Tommy on 03/05/15.
  */
 public class QLog {

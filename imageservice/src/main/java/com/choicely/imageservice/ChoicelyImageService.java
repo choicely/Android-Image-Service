@@ -219,8 +219,8 @@ public class ChoicelyImageService extends ChoicelyLogService {
      * @param downloadThreads Number of Threads used to download images.
      * @param assignThreads   Number of Threads used to read images from memory. Downloads
      *                        will be done in separate threads.
-     * @param client          Custom configured {@link OkHttpClient} for ChoicelyImageService. Can
-     *                        be null, then default {@link OkHttpClient} will be used.
+     * @param client          Custom configured OkHttpClient for ChoicelyImageService. Can
+     *                        be null, then default OkHttpClient will be used.
      */
     public static void init(Context context, FileSystem fileSystem, String filePath, int downloadThreads, int assignThreads, @Nullable OkHttpClient client) {
         if (downloadThreads < 1) {
@@ -237,7 +237,7 @@ public class ChoicelyImageService extends ChoicelyLogService {
     }
 
     /**
-     * Set different directory for {@link ChoicelyImageService}
+     * Set different directory for ChoicelyImageService
      *
      * @param context    Application context to access Cache dir.
      * @param fileSystem FileSystem enum to determine is Application cache or external storage used.
@@ -285,9 +285,9 @@ public class ChoicelyImageService extends ChoicelyLogService {
     }
 
     /**
-     * Get directory used by {@link ChoicelyImageService}
+     * Get directory used by ChoicelyImageService
      *
-     * @return {@link File}
+     * @return File
      */
     public File getImageDirectory() {
         return directory;
@@ -295,7 +295,7 @@ public class ChoicelyImageService extends ChoicelyLogService {
 
     /**
      * Get file matching given url.
-     * <p/>
+     *
      * Warning: If you're using application specific file names this wont work.
      *
      * @param url Location of the image file
@@ -343,9 +343,9 @@ public class ChoicelyImageService extends ChoicelyLogService {
 
     /**
      * Load image from web. This method does not assign image to ImageView but
-     * returns the resulting {@link Bitmap} trough {@link ImageServiceListener}
+     * returns the resulting Bitmap trough ImageServiceListener
      * imageReady method.
-     * <p/>
+     *
      * NOTE: imageReady method will be called in UI thread.
      *
      * @param url         Location of the image in the Internet or in file system.
@@ -376,7 +376,7 @@ public class ChoicelyImageService extends ChoicelyLogService {
     /**
      * Load image from network to local disk. If image already exists, this
      * method does nothing.
-     * <p/>
+     *
      * Also does nothing if location is local.
      *
      * @param url          Image location in network
@@ -389,9 +389,9 @@ public class ChoicelyImageService extends ChoicelyLogService {
     /**
      * Load image from network to local disk. If image already exists, this
      * method does nothing.
-     * <p/>
+     *
      * NOTE: if image is already being downloaded this method returns null.
-     * <p/>
+     *
      * Also does nothing if location is local.
      *
      * @param info ImageInformation
@@ -413,9 +413,9 @@ public class ChoicelyImageService extends ChoicelyLogService {
     /**
      * Load image from network to local disk. If image already exists, this
      * method does nothing.
-     * <p/>
+     *
      * NOTE: if image is already being downloaded this method returns null.
-     * <p/>
+     *
      * Also does nothing if location is local.
      *
      * @param info ImageInformation
@@ -747,14 +747,14 @@ public class ChoicelyImageService extends ChoicelyLogService {
     }
 
     /**
-     * Get {@link Bitmap} instance of image. If image is not cached to local
+     * Get Bitmap instance of image. If image is not cached to local
      * disk, it is loaded first. Loading from disk or network is done in calling
      * thread! This should be called outside UI Thread.
-     * <p/>
+     *
      * This method does not use Cache.
      *
      * @param file File of the image file.
-     * @return {@link Bitmap} of the image or null if the cover path is invalid
+     * @return Bitmap of the image or null if the cover path is invalid
      */
     public Bitmap getBitmap(File file) {
         return getBitmap(file, null);
@@ -765,13 +765,13 @@ public class ChoicelyImageService extends ChoicelyLogService {
     }
 
     /**
-     * Get {@link Bitmap} instance of image. If image is not cached to local
+     * Get Bitmap instance of image. If image is not cached to local
      * disk, it is loaded first. Loading from disk or network is done in calling
      * thread! This should be called outside UI Thread.
      *
      * @param file File of the image file.
      * @param info Image information to get the image from Cache. Can be null;
-     * @return {@link Bitmap} of the image or null if the cover path is invalid
+     * @return Bitmap of the image or null if the cover path is invalid
      */
     public Bitmap getBitmap(File file, @Nullable ImageChooser info) {
         if (file == null || !file.canRead()) {
@@ -1232,7 +1232,7 @@ public class ChoicelyImageService extends ChoicelyLogService {
 
     /**
      * Checks does the local file of the image.
-     * <p/>
+     *
      * NOTE: this only checks from ChoicelyImageService default directory.
      *
      * @param url Image file name.
@@ -1324,9 +1324,9 @@ public class ChoicelyImageService extends ChoicelyLogService {
     }
 
     /**
-     * Set correct rotation to {@link ImageView} based on given files
-     * {@link ExifInterface} data.
-     * <p/>
+     * Set correct rotation to ImageView based on given files
+     * ExifInterface data.
+     *
      * NOTE: This method only works after API 11.
      *
      * @param iv   ImageView that the rotation will be applied to
@@ -1341,8 +1341,8 @@ public class ChoicelyImageService extends ChoicelyLogService {
     }
 
     /**
-     * Get image rotation information from {@link ExifInterface} data from given
-     * {@link File}.
+     * Get image rotation information from ExifInterface data from given
+     * File.
      *
      * @param file Image file the exif data will be loaded from
      * @return Image rotation
