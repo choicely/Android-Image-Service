@@ -1,14 +1,15 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
     defaultConfig {
+        applicationId "com.choicely.imagecompare"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionName "0.1.0"
     }
     buildTypes {
         release {
@@ -16,20 +17,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    defaultConfig {
-        renderscriptTargetApi 18
-        renderscriptSupportModeEnabled true
-    }
-
-
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':choicelyimageservice')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
 
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.google.code.gson:gson:2.7'
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    // Universal Image Locader
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    // Fresco
+    implementation 'com.facebook.fresco:fresco:1.9.0'
 
 }
