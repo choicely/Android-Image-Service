@@ -5,7 +5,7 @@ ext {
     // compile '<groupId>:<artifactId>:<libVersion>'
     groupId = 'com.choicely.imageservice' // package name of the project
     artifactId = "imageservice" // module name of the library
-    libVersion = "0.0.4"
+    libVersion = "0.0.5"
 }
 version = libVersion
 group = groupId
@@ -16,11 +16,12 @@ bintray {
     user = localProps["BINTRAY_USER"]
     key = localProps["BINTRAY_KEY"]
     publications = ['Library']
+    configurations = ['archives']
     publish = true //[Default: false] Whether version should be auto published after an upload
     override = false //[Default: false] Whether to override version artifacts already published
     pkg {
         repo = 'com.choicely'
-        name = 'imageservice'
+        name = artifactId
         userOrg = 'choicely'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/choicely/Android-Image-Service.git'
@@ -46,7 +47,16 @@ install {
     }
 }
 //just copy paste the lines below
-if (project.hasProperty("android")) {
+if (project.hasProperty("kotlin")) { //Kotlin libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc, dependsOn: dokka) {
+
+    }
+} else if (project.hasProperty("android")) {
     task sourcesJar(type: Jar) {
         classifier = 'sources'
         from android.sourceSets.main.java.srcDirs
