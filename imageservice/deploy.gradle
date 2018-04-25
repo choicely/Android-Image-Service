@@ -5,7 +5,7 @@ ext {
     // compile '<groupId>:<artifactId>:<libVersion>'
     groupId = 'com.choicely.imageservice' // package name of the project
     artifactId = "imageservice" // module name of the library
-    libVersion = "0.0.1"
+    libVersion = "0.0.4"
 }
 version = libVersion
 group = groupId
@@ -45,7 +45,6 @@ install {
         }
     }
 }
-
 //just copy paste the lines below
 if (project.hasProperty("android")) {
     task sourcesJar(type: Jar) {
@@ -84,8 +83,9 @@ publishing {
             artifact sourcesJar
             artifact javadocJar
             groupId 'com.choicely'
-            artifactId 'imageservice'
-            version '0.0.1'
+            artifactId artifactId
+            version libVersion
+//            packaging 'aar'
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
                 // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
